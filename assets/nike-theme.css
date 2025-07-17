@@ -1,5 +1,21 @@
 /* Nike Theme CSS - Performance optimized and responsive */
 
+/* Import Nike-inspired Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+/* CSS Variables for Nike Color Scheme */
+:root {
+  --nike-black: #000000;
+  --nike-white: #ffffff;
+  --nike-red: #ff0000;
+  --nike-volt: #c8ff00;
+  --nike-gray: #707070;
+  --nike-light-gray: #f5f5f5;
+  --nike-dark-gray: #1a1a1a;
+  --heading-font: 'Poppins', sans-serif;
+  --body-font: 'Montserrat', sans-serif;
+}
+
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -12,16 +28,35 @@ html {
 }
 
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--body-font);
   line-height: 1.6;
-  color: #333;
+  color: var(--nike-black);
   overflow-x: hidden;
+  background-color: var(--nike-white);
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
   font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
 }
 
 a {
@@ -97,36 +132,64 @@ img {
 }
 
 .btn-primary {
-  background: #ff6b35;
-  color: white;
+  background: var(--nike-black);
+  color: var(--nike-white);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .btn-primary:hover {
-  background: #e55a2b;
+  background: var(--nike-red);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-nike {
+  background: var(--nike-volt);
+  color: var(--nike-black);
+  font-family: var(--heading-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-nike:hover {
+  background: var(--nike-black);
+  color: var(--nike-volt);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(200, 255, 0, 0.4);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #000;
-  border: 2px solid #000;
+  color: var(--nike-black);
+  border: 2px solid var(--nike-black);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .btn-secondary:hover {
-  background: #000;
-  color: white;
+  background: var(--nike-black);
+  color: var(--nike-white);
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #ff6b35;
-  color: #ff6b35;
+  border: 2px solid var(--nike-red);
+  color: var(--nike-red);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .btn-outline:hover {
-  background: #ff6b35;
-  color: white;
+  background: var(--nike-red);
+  color: var(--nike-white);
 }
 
 /* Form Elements */
@@ -142,9 +205,9 @@ img {
 
 .form-input:focus {
   outline: none;
-  border-color: #ff6b35;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  border-color: var(--nike-black);
+  background: var(--nike-white);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive Grid */
@@ -167,16 +230,18 @@ img {
 
 /* Card Components */
 .card {
-  background: white;
+  background: var(--nike-white);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  border: 1px solid var(--nike-light-gray);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-color: var(--nike-black);
 }
 
 /* Animation Keyframes */
@@ -266,7 +331,7 @@ html {
 .form-input:focus,
 .header-menu-link:focus,
 .social-link:focus {
-  outline: 2px solid #ff6b35;
+  outline: 2px solid var(--nike-black);
   outline-offset: 2px;
 }
 
@@ -414,8 +479,8 @@ html {
 .loading-spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #ff6b35;
+  border: 2px solid var(--nike-light-gray);
+  border-top: 2px solid var(--nike-black);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -423,4 +488,224 @@ html {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Nike-specific Product Animations */
+.product-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+.product-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: var(--nike-white);
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-overlay {
+  transform: translateY(0);
+}
+
+.product-quick-view {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: var(--nike-white);
+  color: var(--nike-black);
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-family: var(--heading-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-card:hover .product-quick-view {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Nike Hero Banner Animation */
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--nike-black) 0%, var(--nike-dark-gray) 100%);
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  color: var(--nike-white);
+  animation: heroSlideUp 1s ease-out;
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: heroZoom 20s ease-in-out infinite;
+}
+
+@keyframes heroZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, var(--nike-volt), transparent),
+    radial-gradient(2px 2px at 40px 70px, var(--nike-red), transparent),
+    radial-gradient(1px 1px at 90px 40px, var(--nike-white), transparent);
+  background-size: 100px 100px;
+  animation: particleMove 10s linear infinite;
+}
+
+@keyframes particleMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+
+/* Nike Collection Grid Animation */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 60px 0;
+}
+
+.collection-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  background: var(--nike-white);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.collection-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.collection-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(200, 255, 0, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.collection-item:hover::before {
+  left: 100%;
+}
+
+/* Nike CTA Button Animations */
+.cta-nike {
+  position: relative;
+  background: var(--nike-black);
+  color: var(--nike-white);
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-family: var(--heading-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cta-nike::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--nike-red);
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+.cta-nike:hover::before {
+  left: 0;
+}
+
+.cta-nike:hover {
+  color: var(--nike-white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+}
+
+/* Nike Responsive Animations */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 80vh;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+  
+  .collection-item:hover {
+    transform: translateY(-4px);
+  }
 }

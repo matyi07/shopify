@@ -1,0 +1,29 @@
+{% comment %}
+  Nike-styled button component
+  Usage: {% render 'nike-button', text: 'Shop Now', url: '/collections/all', style: 'primary' %}
+  Styles: primary, secondary, outline, nike
+{% endcomment %}
+
+{% assign button_class = 'btn' %}
+{% case style %}
+  {% when 'primary' %}
+    {% assign button_class = button_class | append: ' btn-primary' %}
+  {% when 'secondary' %}
+    {% assign button_class = button_class | append: ' btn-secondary' %}
+  {% when 'outline' %}
+    {% assign button_class = button_class | append: ' btn-outline' %}
+  {% when 'nike' %}
+    {% assign button_class = button_class | append: ' cta-nike' %}
+  {% else %}
+    {% assign button_class = button_class | append: ' cta-nike' %}
+{% endcase %}
+
+{% if url %}
+  <a href="{{ url }}" class="{{ button_class }}" {% if target %}target="{{ target }}"{% endif %}>
+    {{ text | default: 'Click Here' }}
+  </a>
+{% else %}
+  <button type="{{ type | default: 'button' }}" class="{{ button_class }}" {% if onclick %}onclick="{{ onclick }}"{% endif %}>
+    {{ text | default: 'Click Here' }}
+  </button>
+{% endif %}

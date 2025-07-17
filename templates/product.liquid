@@ -81,7 +81,7 @@
           </div>
           
           <div class="product-actions">
-            <button type="submit" class="btn btn-primary btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
+            <button type="submit" class="btn cta-nike btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
               {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
             </button>
             <button type="button" class="btn btn-secondary btn-wishlist">
@@ -204,7 +204,7 @@
 <style>
   .product-hero {
     padding: 100px 0 60px;
-    background: #f8f8f8;
+    background: var(--nike-light-gray);
   }
   
   .product-content {
@@ -224,16 +224,28 @@
     margin-bottom: 20px;
     overflow: hidden;
     border-radius: 15px;
-    background: white;
+    background: var(--nike-white);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   }
   
   .main-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  
+  .main-image:hover img {
+    transform: scale(1.1);
   }
   
   .thumbnail-images {
@@ -253,7 +265,8 @@
   
   .thumbnail:hover,
   .thumbnail.active {
-    border-color: #ff6b35;
+    border-color: var(--nike-black);
+    transform: scale(1.1);
   }
   
   .thumbnail img {
@@ -266,19 +279,26 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: #ff6b35;
-    color: white;
+    background: var(--nike-red);
+    color: var(--nike-white);
     padding: 8px 16px;
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
+    font-family: var(--heading-font);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    animation: pulse 2s infinite;
   }
   
   .product-title {
+    font-family: var(--heading-font);
     font-size: 2.2rem;
     font-weight: 900;
     margin: 0 0 20px 0;
-    color: #000;
+    color: var(--nike-black);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
   
   .product-price {
@@ -291,7 +311,7 @@
   .price-sale {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ff6b35;
+    color: var(--nike-red);
   }
   
   .price-compare {
@@ -312,7 +332,7 @@
   .price-regular {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #000;
+    color: var(--nike-black);
   }
   
   .product-rating {
@@ -404,8 +424,9 @@
   }
   
   .quantity-btn:hover {
-    border-color: #ff6b35;
-    color: #ff6b35;
+    border-color: var(--nike-black);
+    color: var(--nike-black);
+    background: var(--nike-light-gray);
   }
   
   .quantity-input {
@@ -427,6 +448,39 @@
     flex: 1;
     padding: 15px;
     font-size: 1.1rem;
+    font-family: var(--heading-font);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-nike {
+    background: var(--nike-black);
+    color: var(--nike-white);
+    transition: all 0.3s ease;
+  }
+  
+  .cta-nike::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--nike-red);
+    transition: left 0.4s ease;
+    z-index: -1;
+  }
+  
+  .cta-nike:hover::before {
+    left: 0;
+  }
+  
+  .cta-nike:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
   }
   
   .btn-wishlist {
@@ -450,7 +504,7 @@
   }
   
   .feature svg {
-    color: #ff6b35;
+    color: var(--nike-volt);
   }
   
   .product-details {
@@ -480,8 +534,9 @@
   }
   
   .tab-btn.active {
-    color: #ff6b35;
-    border-bottom-color: #ff6b35;
+    color: var(--nike-black);
+    border-bottom-color: var(--nike-black);
+    font-weight: 700;
   }
   
   .tab-panel {
@@ -508,7 +563,7 @@
   .rating-number {
     font-size: 2rem;
     font-weight: 700;
-    color: #ff6b35;
+    color: var(--nike-red);
   }
   
   .review-count {
