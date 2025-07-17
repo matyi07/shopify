@@ -7,8 +7,8 @@
 :root {
   --nike-black: #000000;
   --nike-white: #ffffff;
-  --nike-red: #ff0000;
-  --nike-volt: #c8ff00;
+  --nike-red: #dc143c;
+  --nike-accent: #ff6b6b;
   --nike-gray: #707070;
   --nike-light-gray: #f5f5f5;
   --nike-dark-gray: #1a1a1a;
@@ -147,8 +147,8 @@ img {
 }
 
 .btn-nike {
-  background: var(--nike-volt);
-  color: var(--nike-black);
+  background: var(--nike-red);
+  color: var(--nike-white);
   font-family: var(--heading-font);
   font-weight: 700;
   text-transform: uppercase;
@@ -157,9 +157,9 @@ img {
 
 .btn-nike:hover {
   background: var(--nike-black);
-  color: var(--nike-volt);
+  color: var(--nike-white);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(200, 255, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
 }
 
 .btn-secondary {
@@ -242,6 +242,29 @@ img {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   border-color: var(--nike-black);
+}
+
+/* Section Transition Animations */
+.section-transition {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.section-transition.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-slide-in {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+
+.section-slide-in.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Animation Keyframes */
@@ -604,8 +627,8 @@ html {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(2px 2px at 20px 30px, var(--nike-volt), transparent),
-    radial-gradient(2px 2px at 40px 70px, var(--nike-red), transparent),
+    radial-gradient(2px 2px at 20px 30px, var(--nike-red), transparent),
+    radial-gradient(2px 2px at 40px 70px, var(--nike-accent), transparent),
     radial-gradient(1px 1px at 90px 40px, var(--nike-white), transparent);
   background-size: 100px 100px;
   animation: particleMove 10s linear infinite;
@@ -650,7 +673,7 @@ html {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(200, 255, 0, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.3), transparent);
   transition: left 0.5s ease;
 }
 

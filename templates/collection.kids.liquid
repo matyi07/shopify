@@ -1,0 +1,524 @@
+{% comment %}
+  Kids collection page template for Nike theme
+{% endcomment %}
+
+<div class="collection-header section-transition kids-collection">
+  <div class="container">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    <p class="collection-subtitle">Fun and comfort for the next generation of athletes</p>
+    {% if collection.description != blank %}
+      <div class="collection-description">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="collection-content section-transition">
+  <div class="container">
+    
+    <!-- Filter and Sort Bar -->
+    <div class="collection-toolbar">
+      <div class="collection-count">
+        <span>{{ collection.products.size }} products</span>
+      </div>
+      <div class="collection-sort">
+        <select id="collection-sort" onchange="window.location.href = this.value;">
+          <option value="{{ collection.url }}?sort_by=manual">Featured</option>
+          <option value="{{ collection.url }}?sort_by=best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+          <option value="{{ collection.url }}?sort_by=title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>A-Z</option>
+          <option value="{{ collection.url }}?sort_by=title-descending" {% if collection.sort_by == 'title-descending' %}selected{% endif %}>Z-A</option>
+          <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+          <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+          <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid grid grid-4">
+      {% for product in collection.products %}
+        <div class="product-card section-slide-in">
+          <div class="product-image">
+            <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" loading="lazy">
+            {% if product.images.size > 1 %}
+              <img src="{{ product.images[1] | img_url: '400x400' }}" alt="{{ product.title }}" class="product-image-hover" loading="lazy">
+            {% endif %}
+            <div class="product-badges">
+              {% if product.tags contains 'new' %}
+                <span class="product-badge badge-new">New</span>
+              {% endif %}
+              {% if product.compare_at_price > product.price %}
+                <span class="product-badge badge-sale">Sale</span>
+              {% endif %}
+            </div>
+            <div class="product-overlay">
+              <button class="btn btn-primary btn-quick-view" data-product-id="{{ product.id }}">Quick View</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">{{ product.type }}</div>
+            <h3 class="product-title">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
+            <div class="product-price">
+              {% if product.compare_at_price > product.price %}
+                <span class="price-sale">{{ product.price | money }}</span>
+                <span class="price-regular">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="price-current">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+            <div class="product-actions">
+              <form action="/cart/add" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" class="btn btn-nike btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
+                  {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="empty-collection">
+          <h3>No products found</h3>
+          <p>Sorry, there are no products in this collection.</p>
+          <a href="/collections/all" class="btn btn-primary">Shop All Products</a>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-btn pagination-prev">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            Previous
+          </a>
+        {% endif %}
+        
+        <div class="pagination-numbers">
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}" class="pagination-number">{{ part.title }}</a>
+            {% else %}
+              <span class="pagination-number active">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-btn pagination-next">
+            Next
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<style>
+  .kids-collection {
+    background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 100%);
+  }
+
+  .collection-header {
+    padding: 80px 0 40px;
+    color: var(--nike-white);
+    text-align: center;
+  }
+
+  .collection-title {
+    font-family: var(--heading-font);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .collection-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0 0 20px 0;
+  }
+
+  .collection-description {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .collection-content {
+    padding: 60px 0;
+  }
+
+  .collection-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 40px 0;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid var(--nike-light-gray);
+  }
+
+  .collection-count {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    color: var(--nike-gray);
+  }
+
+  .collection-sort select {
+    padding: 10px 15px;
+    border: 1px solid var(--nike-light-gray);
+    border-radius: 4px;
+    background: var(--nike-white);
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .collection-sort select:focus {
+    outline: none;
+    border-color: var(--nike-black);
+  }
+
+  .products-grid {
+    gap: 30px;
+    margin: 0 0 60px 0;
+  }
+
+  .product-card {
+    background: var(--nike-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    border: 3px solid transparent;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    border-color: #4a90e2;
+  }
+
+  .product-image {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .product-image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .product-image img:first-child {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-image-hover {
+    opacity: 1;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.1);
+  }
+
+  .product-badges {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+  }
+
+  .product-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 20px;
+    margin-right: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .badge-new {
+    background: #ff6b6b;
+    color: var(--nike-white);
+  }
+
+  .badge-sale {
+    background: #ffd93d;
+    color: var(--nike-black);
+  }
+
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(74, 144, 226, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+
+  .product-info {
+    padding: 25px;
+  }
+
+  .product-category {
+    font-size: 0.8rem;
+    color: var(--nike-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 8px 0;
+  }
+
+  .product-title {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 0 12px 0;
+  }
+
+  .product-title a {
+    color: var(--nike-black);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .product-title a:hover {
+    color: #4a90e2;
+  }
+
+  .product-price {
+    margin: 0 0 20px 0;
+  }
+
+  .price-current,
+  .price-sale {
+    font-family: var(--heading-font);
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--nike-red);
+  }
+
+  .price-regular {
+    font-family: var(--heading-font);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--nike-gray);
+    text-decoration: line-through;
+    margin-left: 8px;
+  }
+
+  .product-actions .btn {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 25px;
+  }
+
+  .empty-collection {
+    text-align: center;
+    padding: 80px 20px;
+    grid-column: 1 / -1;
+  }
+
+  .empty-collection h3 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--nike-black);
+    margin: 0 0 15px 0;
+  }
+
+  .empty-collection p {
+    color: var(--nike-gray);
+    margin: 0 0 30px 0;
+    font-size: 1.1rem;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    padding: 12px 18px;
+    border: 2px solid var(--nike-light-gray);
+    background: var(--nike-white);
+    color: var(--nike-black);
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+  }
+
+  .pagination-btn:hover,
+  .pagination-number:hover {
+    background: #4a90e2;
+    color: var(--nike-white);
+    border-color: #4a90e2;
+    transform: translateY(-2px);
+  }
+
+  .pagination-number.active {
+    background: var(--nike-red);
+    color: var(--nike-white);
+    border-color: var(--nike-red);
+  }
+
+  .pagination-numbers {
+    display: flex;
+    gap: 5px;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .collection-header {
+      padding: 60px 0 30px;
+    }
+
+    .collection-toolbar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .collection-sort {
+      width: 100%;
+    }
+
+    .collection-sort select {
+      width: 100%;
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px) scale(1.01);
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .pagination-btn,
+    .pagination-number {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize section transitions
+    const sections = document.querySelectorAll('.section-transition, .section-slide-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Add to cart functionality
+    const addToCartBtns = document.querySelectorAll('.btn-add-to-cart');
+    addToCartBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const form = btn.closest('form');
+        const formData = new FormData(form);
+        
+        // Show loading state
+        btn.innerHTML = 'Adding...';
+        btn.disabled = true;
+        
+        // Add to cart via AJAX
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Show success message and open cart drawer
+          btn.innerHTML = 'Added!';
+          setTimeout(() => {
+            btn.innerHTML = 'Add to Cart';
+            btn.disabled = false;
+          }, 1000);
+          
+          if (window.cartDrawer) {
+            window.cartDrawer.open();
+          }
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+          btn.innerHTML = 'Error';
+          setTimeout(() => {
+            btn.innerHTML = 'Add to Cart';
+            btn.disabled = false;
+          }, 2000);
+        });
+      });
+    });
+  });
+</script>

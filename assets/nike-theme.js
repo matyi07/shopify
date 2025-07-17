@@ -52,6 +52,16 @@ class NikeTheme {
       btn.addEventListener('click', this.handleAddToCart.bind(this));
     });
 
+    // Cart drawer toggle
+    const cartToggle = document.querySelector('.cart-toggle');
+    if (cartToggle) {
+      cartToggle.addEventListener('click', () => {
+        if (window.cartDrawer) {
+          window.cartDrawer.open();
+        }
+      });
+    }
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', this.handleSmoothScroll.bind(this));
@@ -179,19 +189,19 @@ class NikeTheme {
     // Intersection Observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
+          entry.target.classList.add('visible');
         }
       });
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const animateElements = document.querySelectorAll('.section-transition, .section-slide-in');
     animateElements.forEach(el => observer.observe(el));
 
     // Hero text animation
