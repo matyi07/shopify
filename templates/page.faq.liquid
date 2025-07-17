@@ -1,0 +1,494 @@
+{% comment %}
+  FAQ Page - Nike Style
+{% endcomment %}
+
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Frequently Asked Questions</h1>
+    <p class="page-description">Quick answers to common questions</p>
+  </div>
+</div>
+
+<div class="faq-content">
+  <div class="container">
+    <div class="faq-search">
+      <input type="text" id="faqSearch" placeholder="Search FAQ..." class="search-input">
+      <button class="search-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="faq-categories">
+      <button class="category-btn active" data-category="all">All</button>
+      <button class="category-btn" data-category="orders">Orders</button>
+      <button class="category-btn" data-category="shipping">Shipping</button>
+      <button class="category-btn" data-category="returns">Returns</button>
+      <button class="category-btn" data-category="products">Products</button>
+      <button class="category-btn" data-category="account">Account</button>
+    </div>
+    
+    <div class="faq-sections">
+      <div class="faq-section" data-category="orders">
+        <h2>Orders</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I track my order?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Once your order ships, you'll receive a confirmation email with a tracking number. You can track your package on our website or directly on the carrier's website.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I cancel my order?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>You can cancel your order within 1 hour of placing it. After that, your order enters processing and cannot be cancelled. Contact customer service for assistance.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What payment methods do you accept?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Nike gift cards.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-section" data-category="shipping">
+        <h2>Shipping</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How much does shipping cost?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Standard shipping is FREE on orders over $50. Express shipping is $9.99 and next-day delivery is $19.99. International shipping rates vary by destination.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How long does shipping take?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Standard shipping takes 5-7 business days, express shipping takes 2-3 business days, and next-day delivery arrives within 1 business day (order by 2 PM).</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you ship internationally?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we ship to over 190 countries worldwide. International shipping times and costs vary by destination. Customs duties and taxes may apply.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-section" data-category="returns">
+        <h2>Returns & Exchanges</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What is your return policy?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We offer a 30-day return policy from the date of delivery. Items must be in original condition with tags attached. Returns are free with our prepaid return label.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I start a return?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Visit our returns portal, log in to your account, and select the items you want to return. We'll email you a prepaid return label to print and attach to your package.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How long does it take to get my refund?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Once we receive your return, we'll process your refund within 3-5 business days. The refund will be credited to your original payment method.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-section" data-category="products">
+        <h2>Products</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I find my size?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Use our comprehensive size guide which includes measurements for shoes, clothing, and accessories. We recommend measuring your foot and comparing to our size chart for the best fit.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Are Nike products authentic?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, all products sold on our website are 100% authentic Nike products. We source directly from Nike and authorized distributors.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you restock sold out items?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>We restock popular items regularly, but availability depends on production schedules. Sign up for restock notifications on product pages to be alerted when items return.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-section" data-category="account">
+        <h2>Account</h2>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I create an account?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Click "Sign Up" at the top of any page and fill in your email, password, and basic information. You can also create an account during checkout.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>I forgot my password. How do I reset it?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Click "Forgot Password" on the login page and enter your email address. We'll send you a link to reset your password.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I update my account information?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Log in to your account and go to "Account Settings" where you can update your personal information, addresses, and payment methods.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-cta">
+  <div class="container">
+    <h2>Still have questions?</h2>
+    <p>Our customer service team is ready to help</p>
+    <div class="cta-buttons">
+      <a href="/pages/contact" class="btn btn-primary">Contact Us</a>
+      <a href="tel:1-800-NIKE" class="btn btn-secondary">Call 1-800-NIKE</a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const searchInput = document.getElementById('faqSearch');
+  const faqSections = document.querySelectorAll('.faq-section');
+  
+  // FAQ toggle functionality
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    const toggle = item.querySelector('.faq-toggle');
+    
+    question.addEventListener('click', function() {
+      const isActive = item.classList.contains('active');
+      
+      // Close all other items
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        otherItem.querySelector('.faq-toggle').textContent = '+';
+      });
+      
+      // Toggle current item
+      if (!isActive) {
+        item.classList.add('active');
+        toggle.textContent = '-';
+      }
+    });
+  });
+  
+  // Category filtering
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const category = this.dataset.category;
+      
+      categoryBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      faqSections.forEach(section => {
+        if (category === 'all' || section.dataset.category === category) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    });
+  });
+  
+  // Search functionality
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+      const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+      
+      if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+    color: white;
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  
+  .page-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+  }
+  
+  .faq-content {
+    padding: 80px 0;
+  }
+  
+  .faq-search {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto 50px;
+    position: relative;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    padding-right: 60px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #16a085;
+  }
+  
+  .search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #16a085;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .faq-categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+  }
+  
+  .category-btn {
+    background: none;
+    border: 2px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .category-btn:hover,
+  .category-btn.active {
+    background: #16a085;
+    color: white;
+    border-color: #16a085;
+  }
+  
+  .faq-section {
+    margin-bottom: 50px;
+  }
+  
+  .faq-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #000;
+    border-bottom: 2px solid #16a085;
+    padding-bottom: 10px;
+  }
+  
+  .faq-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  }
+  
+  .faq-question {
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+  }
+  
+  .faq-question:hover {
+    background: #f8f8f8;
+  }
+  
+  .faq-question h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+  }
+  
+  .faq-toggle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #16a085;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-answer {
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 0 25px 25px;
+  }
+  
+  .faq-answer p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .faq-cta {
+    background: #f8f8f8;
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .faq-cta h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .faq-cta p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  @media (max-width: 768px) {
+    .faq-categories {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .category-btn {
+      width: 200px;
+    }
+    
+    .faq-question {
+      padding: 20px;
+    }
+    
+    .faq-question h3 {
+      font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

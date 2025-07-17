@@ -1,0 +1,341 @@
+{% comment %}
+  Contact Page - Nike Style
+{% endcomment %}
+
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-description">We're here to help you every step of the way</p>
+  </div>
+</div>
+
+<div class="contact-content">
+  <div class="container">
+    <div class="contact-methods">
+      <div class="method-grid">
+        <div class="method-card">
+          <div class="method-icon">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <h3>Phone Support</h3>
+          <p>1-800-NIKE (1-800-6453)</p>
+          <p class="hours">Mon-Fri: 7am-10pm EST<br>Sat-Sun: 8am-8pm EST</p>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <h3>Email Support</h3>
+          <p>support@nike.com</p>
+          <p class="hours">Response within 24 hours</p>
+        </div>
+        
+        <div class="method-card">
+          <div class="method-icon">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3>Live Chat</h3>
+          <p>Available 24/7</p>
+          <p class="hours">Instant responses</p>
+          <button class="btn btn-secondary">Start Chat</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact-form-section">
+      <h2>Send Us a Message</h2>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone (Optional)</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="">Select a topic</option>
+            <option value="order">Order Inquiry</option>
+            <option value="product">Product Question</option>
+            <option value="return">Return/Exchange</option>
+            <option value="shipping">Shipping</option>
+            <option value="technical">Technical Support</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="orderNumber">Order Number (if applicable)</label>
+          <input type="text" id="orderNumber" name="orderNumber">
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+    
+    <div class="contact-info">
+      <div class="info-grid">
+        <div class="info-section">
+          <h3>Store Locations</h3>
+          <p>Find a Nike store near you</p>
+          <a href="#" class="btn btn-secondary">Find Stores</a>
+        </div>
+        
+        <div class="info-section">
+          <h3>Corporate Office</h3>
+          <p>One Bowerman Drive<br>Beaverton, OR 97005<br>United States</p>
+        </div>
+        
+        <div class="info-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/pages/size-guide">Size Guide</a></li>
+            <li><a href="/pages/shipping">Shipping Info</a></li>
+            <li><a href="/pages/returns">Returns</a></li>
+            <li><a href="/pages/faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  
+  .page-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+  }
+  
+  .contact-content {
+    padding: 80px 0;
+  }
+  
+  .contact-methods {
+    margin-bottom: 80px;
+  }
+  
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+  }
+  
+  .method-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .method-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .method-icon {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .method-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .method-card p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .hours {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form-section {
+    background: #f8f8f8;
+    padding: 60px;
+    border-radius: 20px;
+    margin-bottom: 80px;
+  }
+  
+  .contact-form-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #000;
+  }
+  
+  .contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 30px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background: white;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #2c3e50;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .contact-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+  
+  .info-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .info-section h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .info-section p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .info-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .info-section li {
+    margin-bottom: 10px;
+  }
+  
+  .info-section a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .info-section a:hover {
+    color: #34495e;
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .method-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    .contact-form-section {
+      padding: 40px 20px;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+</style>
