@@ -1,0 +1,230 @@
+{% comment %}
+  Athlete endorsements section showcasing brand ambassadors
+{% endcomment %}
+
+<section class="athlete-endorsements" id="athlete-endorsements">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Trusted by Champions</h2>
+      <p class="section-subtitle">See how our athletes push boundaries and achieve greatness</p>
+    </div>
+    
+    <div class="athletes-grid">
+      <div class="athlete-card">
+        <div class="athlete-image">
+          <img src="https://via.placeholder.com/400x500/000000/ffffff?text=ATHLETE+1" alt="Professional Athlete" class="athlete-photo">
+          <div class="athlete-overlay">
+            <div class="athlete-quote">
+              <blockquote>"Nike gives me the confidence to push my limits every single day."</blockquote>
+              <cite>- Professional Runner</cite>
+            </div>
+          </div>
+        </div>
+        <div class="athlete-info">
+          <h3 class="athlete-name">Jordan Smith</h3>
+          <p class="athlete-sport">Marathon Runner</p>
+          <div class="athlete-achievements">
+            <span class="achievement">Olympic Gold</span>
+            <span class="achievement">World Record</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="athlete-card">
+        <div class="athlete-image">
+          <img src="https://via.placeholder.com/400x500/000000/ffffff?text=ATHLETE+2" alt="Professional Athlete" class="athlete-photo">
+          <div class="athlete-overlay">
+            <div class="athlete-quote">
+              <blockquote>"The perfect gear for peak performance. Just Do It."</blockquote>
+              <cite>- Professional Basketball Player</cite>
+            </div>
+          </div>
+        </div>
+        <div class="athlete-info">
+          <h3 class="athlete-name">Maya Johnson</h3>
+          <p class="athlete-sport">Basketball Player</p>
+          <div class="athlete-achievements">
+            <span class="achievement">MVP</span>
+            <span class="achievement">Championship</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="athlete-card">
+        <div class="athlete-image">
+          <img src="https://via.placeholder.com/400x500/000000/ffffff?text=ATHLETE+3" alt="Professional Athlete" class="athlete-photo">
+          <div class="athlete-overlay">
+            <div class="athlete-quote">
+              <blockquote>"Innovation meets performance. This is why I choose Nike."</blockquote>
+              <cite>- Professional Soccer Player</cite>
+            </div>
+          </div>
+        </div>
+        <div class="athlete-info">
+          <h3 class="athlete-name">Carlos Rodriguez</h3>
+          <p class="athlete-sport">Soccer Player</p>
+          <div class="athlete-achievements">
+            <span class="achievement">World Cup</span>
+            <span class="achievement">Golden Boot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section-footer">
+      <a href="/pages/athletes" class="btn btn-primary">Meet Our Athletes</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .athlete-endorsements {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    color: white;
+  }
+  
+  .athletes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+  
+  .athlete-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .athlete-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .athlete-image {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  .athlete-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .athlete-card:hover .athlete-photo {
+    transform: scale(1.05);
+  }
+  
+  .athlete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .athlete-card:hover .athlete-overlay {
+    opacity: 1;
+  }
+  
+  .athlete-quote blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: 0 0 10px 0;
+    color: white;
+  }
+  
+  .athlete-quote cite {
+    font-size: 0.9rem;
+    color: #ff6b35;
+    font-weight: 500;
+  }
+  
+  .athlete-info {
+    padding: 25px;
+  }
+  
+  .athlete-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    color: white;
+  }
+  
+  .athlete-sport {
+    font-size: 1rem;
+    color: #ff6b35;
+    margin: 0 0 15px 0;
+    font-weight: 500;
+  }
+  
+  .athlete-achievements {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .achievement {
+    background: rgba(255, 107, 53, 0.2);
+    color: #ff6b35;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid #ff6b35;
+  }
+  
+  .section-footer {
+    text-align: center;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #ff6b35;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .athlete-endorsements {
+      padding: 60px 0;
+    }
+    
+    .athletes-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    .athlete-image {
+      height: 300px;
+    }
+    
+    .athlete-overlay {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+  }
+</style>

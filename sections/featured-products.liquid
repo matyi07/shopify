@@ -1,0 +1,275 @@
+{% comment %}
+  Featured products section with dynamic animations and hover effects
+{% endcomment %}
+
+<section class="featured-products" id="featured-products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Products</h2>
+      <p class="section-subtitle">Discover our most popular items</p>
+    </div>
+    
+    <div class="products-grid">
+      {% for product in collections.featured.products limit: 8 %}
+        <div class="product-card" data-product-id="{{ product.id }}">
+          <div class="product-image-wrapper">
+            <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="product-image">
+            <div class="product-overlay">
+              <div class="product-actions">
+                <button class="btn-quick-view" data-product-id="{{ product.id }}">Quick View</button>
+                <form action="/cart/add" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button type="submit" class="btn-add-to-cart">Add to Cart</button>
+                </form>
+              </div>
+            </div>
+            {% if product.compare_at_price > product.price %}
+              <div class="product-badge">Sale</div>
+            {% endif %}
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">{{ product.title }}</h3>
+            <div class="product-price">
+              {% if product.compare_at_price > product.price %}
+                <span class="price-sale">{{ product.price | money }}</span>
+                <span class="price-compare">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="price-regular">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+            <div class="product-colors">
+              {% for variant in product.variants limit: 5 %}
+                <div class="color-swatch" style="background-color: {{ variant.option1 | handleize }}"></div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="section-footer">
+      <a href="/collections/all" class="btn btn-outline">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-products {
+    padding: 80px 0;
+    background: #f8f8f8;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0 0 15px 0;
+    color: #000;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
+  .product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover .product-image {
+    transform: scale(1.1);
+  }
+  
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+  
+  .product-actions {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-quick-view,
+  .btn-add-to-cart {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ff6b35;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn-quick-view:hover,
+  .btn-add-to-cart:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+  }
+  
+  .product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff6b35;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+  }
+  
+  .product-info {
+    padding: 25px;
+  }
+  
+  .product-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: #000;
+  }
+  
+  .product-price {
+    margin: 0 0 15px 0;
+  }
+  
+  .price-sale {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-right: 10px;
+  }
+  
+  .price-compare {
+    font-size: 0.9rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  .price-regular {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .product-colors {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .color-swatch:hover {
+    transform: scale(1.2);
+  }
+  
+  .section-footer {
+    text-align: center;
+  }
+  
+  .btn-outline {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 2px solid #000;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline:hover {
+    background: #000;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .featured-products {
+      padding: 60px 0;
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .product-actions {
+      flex-direction: row;
+      gap: 10px;
+    }
+    
+    .btn-quick-view,
+    .btn-add-to-cart {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+  }
+</style>

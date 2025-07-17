@@ -1,0 +1,751 @@
+{% comment %}
+  Collection template with filtering and sorting
+{% endcomment %}
+
+<section class="collection-hero">
+  <div class="container">
+    <div class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <p class="collection-description">{{ collection.description }}</p>
+      {% endif %}
+      <div class="collection-stats">
+        <span class="product-count">{{ collection.products.size }} products</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collection-content">
+  <div class="container">
+    <div class="collection-controls">
+      <div class="filters">
+        <button class="filter-toggle" id="filter-toggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          Filters
+        </button>
+        
+        <div class="filter-panel" id="filter-panel">
+          <div class="filter-group">
+            <h3 class="filter-title">Price</h3>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="0-50">
+                <span>Under $50</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="50-100">
+                <span>$50 - $100</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="100-200">
+                <span>$100 - $200</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="200+">
+                <span>Over $200</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="filter-group">
+            <h3 class="filter-title">Size</h3>
+            <div class="filter-options">
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="7">
+                <span>7</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="8">
+                <span>8</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="9">
+                <span>9</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="10">
+                <span>10</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="11">
+                <span>11</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="size" value="12">
+                <span>12</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="filter-group">
+            <h3 class="filter-title">Color</h3>
+            <div class="filter-options color-options">
+              <label class="color-filter" style="background: #000;" title="Black">
+                <input type="checkbox" name="color" value="black">
+              </label>
+              <label class="color-filter" style="background: #fff; border: 2px solid #ddd;" title="White">
+                <input type="checkbox" name="color" value="white">
+              </label>
+              <label class="color-filter" style="background: #ff6b35;" title="Orange">
+                <input type="checkbox" name="color" value="orange">
+              </label>
+              <label class="color-filter" style="background: #2196f3;" title="Blue">
+                <input type="checkbox" name="color" value="blue">
+              </label>
+              <label class="color-filter" style="background: #4caf50;" title="Green">
+                <input type="checkbox" name="color" value="green">
+              </label>
+              <label class="color-filter" style="background: #f44336;" title="Red">
+                <input type="checkbox" name="color" value="red">
+              </label>
+            </div>
+          </div>
+          
+          <div class="filter-actions">
+            <button class="btn btn-primary" id="apply-filters">Apply Filters</button>
+            <button class="btn btn-secondary" id="clear-filters">Clear All</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sort-controls">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" class="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="newest">Newest</option>
+          <option value="best-selling">Best Selling</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="products-grid" id="products-grid">
+      {% for product in collection.products %}
+        <div class="product-card" data-product-id="{{ product.id }}" data-price="{{ product.price }}" data-date="{{ product.created_at }}">
+          <div class="product-image-wrapper">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="product-image">
+            </a>
+            <div class="product-overlay">
+              <div class="product-actions">
+                <button class="btn-quick-view" data-product-id="{{ product.id }}">Quick View</button>
+                <form action="/cart/add" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button type="submit" class="btn-add-to-cart">Add to Cart</button>
+                </form>
+              </div>
+            </div>
+            {% if product.compare_at_price > product.price %}
+              <div class="product-badge">Sale</div>
+            {% endif %}
+            <button class="wishlist-btn" data-product-id="{{ product.id }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
+            <div class="product-price">
+              {% if product.compare_at_price > product.price %}
+                <span class="price-sale">{{ product.price | money }}</span>
+                <span class="price-compare">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="price-regular">{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+            <div class="product-colors">
+              {% for variant in product.variants limit: 5 %}
+                <div class="color-swatch" style="background-color: {{ variant.option1 | handleize }}"></div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+    {% if collection.products.size == 0 %}
+      <div class="empty-collection">
+        <div class="empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+        </div>
+        <h3>No products found</h3>
+        <p>Try adjusting your filters or search terms</p>
+        <a href="/collections/all" class="btn btn-primary">Browse All Products</a>
+      </div>
+    {% endif %}
+    
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-btn">Previous</a>
+        {% endif %}
+        
+        <div class="pagination-numbers">
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a href="{{ part.url }}" class="pagination-number">{{ part.title }}</a>
+            {% else %}
+              <span class="pagination-number current">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-btn">Next</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .collection-hero {
+    padding: 100px 0 60px;
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    margin-top: 70px;
+  }
+  
+  .collection-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .collection-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0 0 20px 0;
+    color: #000;
+  }
+  
+  .collection-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+  }
+  
+  .product-count {
+    font-weight: 600;
+    color: #ff6b35;
+  }
+  
+  .collection-content {
+    padding: 40px 0 80px;
+  }
+  
+  .collection-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 2px solid #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-toggle:hover {
+    border-color: #ff6b35;
+    color: #ff6b35;
+  }
+  
+  .filter-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+  }
+  
+  .filter-panel.active {
+    display: block;
+  }
+  
+  .filters {
+    position: relative;
+  }
+  
+  .filter-group {
+    margin-bottom: 25px;
+  }
+  
+  .filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: #000;
+  }
+  
+  .filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .filter-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ff6b35;
+  }
+  
+  .color-options {
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .color-filter {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  
+  .color-filter:hover {
+    transform: scale(1.1);
+  }
+  
+  .color-filter input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .color-filter input[type="checkbox"]:checked + .color-filter::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+  }
+  
+  .filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .filter-actions .btn {
+    flex: 1;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sort-controls label {
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .sort-select {
+    padding: 8px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
+  .product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-image-wrapper {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+  
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+  
+  .product-actions {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-quick-view,
+  .btn-add-to-cart {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ff6b35;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  .btn-quick-view:hover,
+  .btn-add-to-cart:hover {
+    background: #e55a2b;
+  }
+  
+  .wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  
+  .wishlist-btn:hover {
+    background: #ff6b35;
+    color: white;
+  }
+  
+  .product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff6b35;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+  }
+  
+  .product-info {
+    padding: 20px;
+  }
+  
+  .product-title {
+    margin: 0 0 10px 0;
+  }
+  
+  .product-title a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .product-title a:hover {
+    color: #ff6b35;
+  }
+  
+  .product-price {
+    margin: 0 0 15px 0;
+  }
+  
+  .price-sale {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-right: 8px;
+  }
+  
+  .price-compare {
+    font-size: 0.9rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  .price-regular {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .product-colors {
+    display: flex;
+    gap: 6px;
+  }
+  
+  .color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .empty-collection {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666;
+  }
+  
+  .empty-icon {
+    margin: 0 auto 20px;
+    color: #ccc;
+  }
+  
+  .empty-collection h3 {
+    font-size: 1.5rem;
+    margin: 0 0 10px 0;
+    color: #000;
+  }
+  
+  .empty-collection p {
+    margin: 0 0 30px 0;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  
+  .pagination-btn,
+  .pagination-number {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination-btn:hover,
+  .pagination-number:hover {
+    border-color: #ff6b35;
+    color: #ff6b35;
+  }
+  
+  .pagination-number.current {
+    background: #ff6b35;
+    color: white;
+    border-color: #ff6b35;
+  }
+  
+  .pagination-numbers {
+    display: flex;
+    gap: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .collection-controls {
+      flex-direction: column;
+      gap: 20px;
+      align-items: stretch;
+    }
+    
+    .filter-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      padding: 20px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .product-actions {
+      flex-direction: row;
+      gap: 8px;
+    }
+    
+    .btn-quick-view,
+    .btn-add-to-cart {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<script>
+  // Collection page interactions
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterPanel = document.getElementById('filter-panel');
+    const sortSelect = document.getElementById('sort-select');
+    const productsGrid = document.getElementById('products-grid');
+    const applyFiltersBtn = document.getElementById('apply-filters');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    
+    // Toggle filter panel
+    filterToggle.addEventListener('click', function() {
+      filterPanel.classList.toggle('active');
+    });
+    
+    // Close filter panel when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!filterToggle.contains(e.target) && !filterPanel.contains(e.target)) {
+        filterPanel.classList.remove('active');
+      }
+    });
+    
+    // Sort products
+    sortSelect.addEventListener('change', function() {
+      const sortValue = this.value;
+      const productCards = Array.from(productsGrid.children);
+      
+      productCards.sort((a, b) => {
+        switch(sortValue) {
+          case 'price-low':
+            return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+          case 'price-high':
+            return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+          case 'newest':
+            return new Date(b.dataset.date) - new Date(a.dataset.date);
+          default:
+            return 0;
+        }
+      });
+      
+      // Re-append sorted products
+      productCards.forEach(card => productsGrid.appendChild(card));
+    });
+    
+    // Apply filters
+    applyFiltersBtn.addEventListener('click', function() {
+      applyFilters();
+      filterPanel.classList.remove('active');
+    });
+    
+    // Clear filters
+    clearFiltersBtn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('.color-filter input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      applyFilters();
+    });
+    
+    function applyFilters() {
+      const priceFilters = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(cb => cb.value);
+      const sizeFilters = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value);
+      const colorFilters = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(cb => cb.value);
+      
+      const productCards = document.querySelectorAll('.product-card');
+      
+      productCards.forEach(card => {
+        let shouldShow = true;
+        
+        // Price filtering (simplified - in real implementation, use actual product data)
+        if (priceFilters.length > 0) {
+          const productPrice = parseInt(card.dataset.price);
+          const matchesPrice = priceFilters.some(filter => {
+            switch(filter) {
+              case '0-50': return productPrice < 5000;
+              case '50-100': return productPrice >= 5000 && productPrice < 10000;
+              case '100-200': return productPrice >= 10000 && productPrice < 20000;
+              case '200+': return productPrice >= 20000;
+              default: return false;
+            }
+          });
+          if (!matchesPrice) shouldShow = false;
+        }
+        
+        // Show/hide product card
+        card.style.display = shouldShow ? 'block' : 'none';
+      });
+    }
+  });
+</script>

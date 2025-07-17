@@ -1,0 +1,276 @@
+{% comment %}
+  Brand story section with Nike's mission and values
+{% endcomment %}
+
+<section class="brand-story" id="brand-story">
+  <div class="container">
+    <div class="brand-content">
+      <div class="brand-text">
+        <div class="brand-logo">
+          <img src="{{ 'headpics.jpg' | asset_url }}" alt="Nike Swoosh" class="brand-swoosh">
+        </div>
+        <h2 class="brand-title">Innovation for Every Athlete</h2>
+        <p class="brand-description">
+          Since 1972, we've been dedicated to bringing inspiration and innovation to every athlete in the world. 
+          If you have a body, you are an athlete. Our mission is to create products that help you unlock your potential 
+          and achieve your goals, no matter how big or small.
+        </p>
+        <div class="brand-stats">
+          <div class="stat">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Years of Innovation</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">Elite Athletes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">190+</span>
+            <span class="stat-label">Countries Served</span>
+          </div>
+        </div>
+        <div class="brand-actions">
+          <a href="/pages/about" class="btn btn-primary">Our Story</a>
+          <a href="/pages/sustainability" class="btn btn-secondary">Sustainability</a>
+        </div>
+      </div>
+      <div class="brand-visual">
+        <div class="visual-grid">
+          <div class="visual-item visual-1">
+            <div class="visual-content">
+              <h3>Performance</h3>
+              <p>Cutting-edge technology for peak performance</p>
+            </div>
+          </div>
+          <div class="visual-item visual-2">
+            <div class="visual-content">
+              <h3>Style</h3>
+              <p>Iconic designs that make a statement</p>
+            </div>
+          </div>
+          <div class="visual-item visual-3">
+            <div class="visual-content">
+              <h3>Innovation</h3>
+              <p>Pushing boundaries with every product</p>
+            </div>
+          </div>
+          <div class="visual-item visual-4">
+            <div class="visual-content">
+              <h3>Community</h3>
+              <p>Building connections through sport</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-story {
+    padding: 100px 0;
+    background: white;
+    position: relative;
+  }
+  
+  .brand-story::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff6b35, transparent);
+  }
+  
+  .brand-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  
+  .brand-logo {
+    margin-bottom: 30px;
+  }
+  
+  .brand-swoosh {
+    width: 80px;
+    height: auto;
+  }
+  
+  .brand-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0 0 25px 0;
+    color: #000;
+    line-height: 1.2;
+  }
+  
+  .brand-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0 0 40px 0;
+  }
+  
+  .brand-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ff6b35;
+    margin-bottom: 5px;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .brand-actions {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background: #ff6b35;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #e55a2b;
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background: transparent;
+    color: #000;
+    border: 2px solid #000;
+  }
+  
+  .btn-secondary:hover {
+    background: #000;
+    color: white;
+  }
+  
+  .brand-visual {
+    position: relative;
+  }
+  
+  .visual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .visual-item {
+    aspect-ratio: 1;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .visual-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .visual-1 {
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  }
+  
+  .visual-2 {
+    background: linear-gradient(135deg, #1a1a1a, #333);
+  }
+  
+  .visual-3 {
+    background: linear-gradient(135deg, #4a90e2, #357abd);
+  }
+  
+  .visual-4 {
+    background: linear-gradient(135deg, #50c878, #45b368);
+  }
+  
+  .visual-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    color: white;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  }
+  
+  .visual-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+  
+  .visual-content p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    .brand-story {
+      padding: 80px 0;
+    }
+    
+    .brand-content {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    
+    .brand-stats {
+      justify-content: space-between;
+    }
+    
+    .stat-number {
+      font-size: 1.5rem;
+    }
+    
+    .brand-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn {
+      width: 200px;
+      text-align: center;
+    }
+    
+    .visual-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    .visual-item {
+      aspect-ratio: 2;
+    }
+  }
+</style>
